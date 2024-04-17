@@ -4,6 +4,7 @@ The list of software or dependencies to operate the program
 - Mysql
 - Maven
 - Any Ide
+
 /////////////////////////////////////////////////////////////////////
 The list of maven pom dependencies
 - spring-boot-starter-security
@@ -17,6 +18,7 @@ The list of maven pom dependencies
 - hazelcast
 - spring-boot-starter-cache
 - spring-security-test
+
 /////////////////////////////////////////////////////////////////////
 The .properties file setting
 spring.datasource.url = jdbc:mysql://localhost:3306/your_database?useSSL=false
@@ -26,6 +28,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+
 /////////////////////////////////////////////////////////////////////
 
 ## How to operate
