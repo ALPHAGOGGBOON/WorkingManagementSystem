@@ -44,7 +44,7 @@ The easy and basic method to run and and operate the code such as:
     - download and install postman online
    
 ## Current structure
-user & admin --> api --> coresponding service
+user & admin --> api --> corresponding service
 
 ## Current authentication method
 using InMemoryUserDetailsManager, which just hardcode the authentication
