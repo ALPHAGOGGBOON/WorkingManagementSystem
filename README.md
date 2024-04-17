@@ -6,6 +6,7 @@ The list of software or dependencies to operate the program
 - Any Ide
 
 /////////////////////////////////////////////////////////////////////
+
 The list of maven pom dependencies
 - spring-boot-starter-security
 - spring-boot-starter-data-jpa
@@ -20,6 +21,7 @@ The list of maven pom dependencies
 - spring-security-test
 
 /////////////////////////////////////////////////////////////////////
+
 The .properties file setting
 spring.datasource.url = jdbc:mysql://localhost:3306/your_database?useSSL=false
 spring.datasource.username = TheRoot
