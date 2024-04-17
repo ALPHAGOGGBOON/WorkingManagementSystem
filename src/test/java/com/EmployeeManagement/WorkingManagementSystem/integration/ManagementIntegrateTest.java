@@ -80,6 +80,7 @@ public class ManagementIntegrateTest {
 
     @Test //problem unauthorize access 
     void shouldFetchAllDepartment() {
+        
         List<Department> list = restTemplate.getForObject(baseUrl + "/department", List.class);
 
         assertThat(list.size()).isNotNull();

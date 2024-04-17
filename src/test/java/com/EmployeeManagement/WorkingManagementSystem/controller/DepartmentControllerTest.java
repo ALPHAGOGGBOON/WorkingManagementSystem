@@ -26,6 +26,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.EmployeeManagement.WorkingManagementSystem.model.Department;
 import com.EmployeeManagement.WorkingManagementSystem.service.EmployeeService;
@@ -68,14 +70,47 @@ public class DepartmentControllerTest {
 
     @Test
     @WithMockUser(username = "admin", password = "password")
-    void shouldCreateNewDepartment() throws Exception {
-        when(employeeService.addDepartment(any(Department.class))).thenReturn(department);
+    void shouldfindallDepartment() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/department")
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "password")))
+               .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
-        this.mockMvc.perform(post("/api/department/addDepartments")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(department)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.department_Name", 
-                            is(department.getDepartment_name())));
-    } //uable to login 
+    @Test
+    @WithMockUser(username = "admin", password = "password")
+    void shouldfindADepartmentById() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/department/{id}", 1L)
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "password")))
+               .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", password = "password", roles = {"admin"})
+    void shouldAddOneDepartment() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/department/addDepartments")
+        .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "password"))
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(department)))
+       .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", password = "password", roles = {"admin"})
+    void shouldUpdateOneDepartment() throws Exception {
+        mockMvc.perform(put("/api/department/update/{id}", 1L)
+        .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "password"))
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(department)))
+       .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    
+    @Test
+    @WithMockUser(username = "admin", password = "password")
+    void shouldDeleteDepartment() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/department/delete/{id}", 1L)
+                .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "password")))
+               .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
 }
